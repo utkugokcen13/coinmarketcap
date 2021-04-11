@@ -9,12 +9,15 @@ cursor = con.cursor()
 
 def db_doldur():
     # Tabloyu düşürüyoruz.
-    cursor.execute("DROP TABLE coin")
-    con.commit()
+    #cursor.execute("DROP TABLE coin")
+    #con.commit()
 
     # Tabloyu oluşturuyoruz (Yoksa)
     cursor.execute("CREATE TABLE IF NOT EXISTS coin(id INTEGER PRIMARY KEY, symbol TEXT, "
                    "amount INTEGER, price REAL)")
+    con.commit()
+
+    cursor.execute("delete from coin")
     con.commit()
 
     cursor.execute("insert into coin values (1, 'BTC', 3, 45000)")
@@ -319,7 +322,7 @@ def app_header():
                      font='Lato 12 bold', borderwidth=2, relief='groove', padx=5, pady=5)
     total_pl.grid(row=0, column=7, sticky=N+S+W+E)
 
-#db_doldur()
+db_doldur()
 app_menu()
 app_header()
 my_portfolio()
